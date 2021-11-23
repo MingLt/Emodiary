@@ -1,0 +1,12 @@
+{
+  
+  "navigationBarTitleText": "详情",
+  "usingComponents": {
+    "rclick":"../../components/roundclick/rclick",
+    "dianzan":"../../components/dianzan/dianzan",
+    "comment":"../../components/comment/comment",
+    "collect":"../../components/collect/collect",
+    "com_detail":"../../components/com_detail/com_detail",
+    "more":"../../components/more/more"
+  }
+}

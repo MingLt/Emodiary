@@ -1,0 +1,53 @@
+<image class="bg" src="../../images/backg.png"></image>
+<view class="container">
+  <view class="page-body">
+    <view>
+      <image class="weather" src="../../images/sun1.png"></image>
+    </view>
+    <div class="datebox">
+      <view style="width:250rpx ;font-size: x-large;">{{month}}月</view>
+      <view style="width:250rpx;font-size: large;color:#666;">{{year}}年</view>
+    <text class="diasta">日记统计</text>
+    </div>
+  </view>
+</view>
+<view class="selector">
+  <view class="s_click">全部</view>
+  <view class="s_click">焦虑</view>
+  <view class="s_click">悲伤</view>
+  <view class="s_click">难过</view>
+  <view class="s_click">气愤</view>
+</view>
+
+<view class="listview-container margin_bottom">
+<block wx:if="{{array.length}}">
+  <view wx:for="{{array}}" wx:key="index">
+    <view class="playlog-item" >
+      <view class="dotline">
+        <!-- 竖线 -->
+        <view class="line"></view>
+        <!-- 圆点 -->
+        <view class="dot">{{index+1}}</view>
+        <!-- <view class="time">{{item.CreateTime}}</view> -->
+        <!-- 时间戳 -->
+      </view>
+      <view class="content" bindtap="diaryContent" data-id="{{index}}">
+        <text class="ctime">{{item.write_down_time}}</text>
+        <text class="chapter">{{item.diary_content}}</text>
+      </view>
+    </view>
+  </view>
+</block>
+<block wx:else >
+<view class="voiddiary">
+<text class="voiddi">空空如也，</text>
+<text class="voiddi">来写一篇日记吧</text>
+</view>
+
+</block>
+  
+</view>
+
+<image class="round-click" bindtap="editDairy" src="../../images/click3.png"></image>
+
+<eat wx:if="{{flag1}}" id="eat" class="monster-eat"></eat>

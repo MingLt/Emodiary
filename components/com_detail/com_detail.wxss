@@ -1,0 +1,70 @@
+/* 外围框框 */
+.d_post{
+  width: 725rpx;
+  padding: 10rpx;  /* 间距 */
+  border-radius: 5rpx;
+  background-color: #ffffff00;
+  border-radius: 20rpx;  /* 圆角的大小 */
+}
+.d_post1{
+  width: 98%;
+  padding: 10rpx;  /* 间距 */
+  border-radius: 5rpx;
+  background-color: #f8fcfb00;
+  border-radius: 20rpx;  /* 圆角的大小 */
+  box-shadow: 2rpx 2rpx 6rpx 6rpx #b2f1e7;
+} 
+/* 一级用户名时间栏 */
+.d_one{
+  display:flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  line-height:13px;
+  margin:10rpx;
+}
+.d_name{
+  font-size: 21px;
+  font-family:"楷体";
+}
+.d_time{
+  color: #9ca0a0;
+  font-size: 16px;
+  font-family:"楷体";
+}
+/* 二级评论内容 */
+.d_potxt{
+  font-size: 18px;
+  font-family:"楷体";
+  line-height:10rpx;
+}
+/* 三级操作列表（评论只有more） */
+.d_optext{
+  font-size: 18px;
+  font-family:"楷体";
+  line-height:30rpx;
+  color: #97a3a3;
+}
+.d_option{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 15rpx;
+  margin-right:15rpx;
+  align-items:baseline ;
+}
+/* .option{
+  display: flex;
+  align-items:centers;
+  flex-direction: row-reverse;
+  margin-bottom: 15rpx;
+  justify-content:space-between;
+}
+.option1{
+  display: flex;
+  align-items:center;
+  flex-direction: row;
+} */
+/* .img-button{
+  padding: 0;
+  border: none;
+
+} */

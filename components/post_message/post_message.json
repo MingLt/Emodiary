@@ -1,0 +1,9 @@
+{
+  "component": true,
+  "usingComponents": {
+    "dianzan":"../../components/dianzan/dianzan",
+    "comment":"../../components/comment/comment",
+    "collect":"../../components/collect/collect",
+    "more":"../../components/more/more"
+  }
+}

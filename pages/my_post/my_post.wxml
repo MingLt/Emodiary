@@ -1,0 +1,62 @@
+<view >
+  <image class="bg" src="../../images/backg.png"></image>
+ 
+  <!-- 帖子模块 -->
+  <view>
+    <!-- 循环输出帖子列表 -->
+    <view wx:for="{{array}}" wx:key="index">
+      <!--components/post_message/post_message.wxml-->
+      <view class="post">
+        <view class="post1">
+          <view bindtap="postContent" data-id="{{index}}" class="post2">
+
+            <!-- 用户名 & 时间 -->
+            <view class="one">
+
+              <text class="name">
+                {{name}}
+              </text>
+
+              <text class="time">
+                {{item.time}}
+              </text>
+              
+            </view>
+
+            <!-- 文章内容 -->
+            <view class="two" >
+              <text class="potxt">
+                {{item.content}}
+              </text>
+            </view>
+          </view>
+          
+          <!-- 操作列表 -->
+          <view class="option">
+            <view class="option1">
+              <dianzan bindtap="add_dianzan" data-id="{{index}} "></dianzan>
+              <text>{{item.likes}}</text>
+              <text decode="true" class="optext"> &nbsp; &nbsp;</text>
+
+              <comment bindtap="add_comment"></comment>
+              <text decode="true">&nbsp;</text>
+              <text>{{item.comments}}</text>
+              <text decode="true"> &nbsp; &nbsp; &nbsp;</text>
+
+              <collect bindtap="add_collect" data-id="{{index}} "></collect>
+              <text>{{item.collects}}</text>
+            </view>
+            <view class="option2">
+              <more></more>
+            </view>
+          </view>
+          
+        </view>  
+
+      </view>
+
+    </view> 
+    
+  </view>
+
+</view>

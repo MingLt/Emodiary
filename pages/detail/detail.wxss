@@ -1,0 +1,167 @@
+.bg{
+  width: 100%;
+  height: 100%;
+  position:fixed; 
+  background-size:100% 100%;
+  z-index: -1;
+  filter: blur(3rpx);
+}
+
+/* “全部评论” */
+.tet{
+  color: #7d7e7e;
+  font-size: 16px;
+  font-family:"楷体";
+  margin: 20rpx;
+}
+.tev{
+  margin:10rpx;
+}
+
+.round-click{
+  height:120rpx;
+  width: 120rpx;
+  border-radius: 100%;
+    position: fixed;
+    top: 1030rpx;
+    right: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+
+/* 树洞帖子的样式参数 */
+
+/* 最外层：树洞帖子 */
+.t_post{
+  width: 725rpx;
+  padding: 10rpx;  /* 间距 */
+  border-radius: 5rpx;
+  background-color: #ffffff00;
+  border-radius: 20rpx;  /* 圆角的大小 */
+}
+.t_post1{
+  width: 98%;
+  padding: 10rpx;  /* 间距 */
+  border-radius: 5rpx;
+  background-color: #effaf900;
+  border-radius: 20rpx;  /* 圆角的大小 */
+  box-shadow: 2rpx 2rpx 6rpx 6rpx #caf2f3;
+} 
+
+/* 次外层：可链接详情的导航框 包含Id, time,post_text */
+.t_post2 {
+  height: 99.9%;
+  width: 99.9%;
+  justify-content: left;
+  align-items: top;
+  border-radius: 20rpx; 
+}
+
+/* 第一栏：id,time */
+.t_one{
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between ;
+  line-height:13px;
+  margin:10rpx;
+}
+.t_name{
+  
+  font-size: 17px;
+  font-family:"楷体";
+}
+.t_time{
+  color: #9ca0a0;
+  font-size: 14px;
+}
+
+/* 第二栏：post_text */
+.t_potxt{
+  font-size: 18px;
+  font-family:"楷体";
+  line-height:30rpx;
+}
+
+/* 第三栏：操作列表 */
+.t_option{
+  display: flex;
+  align-items:centers;
+  flex-direction: row;
+  justify-content:space-between ;
+  margin:15rpx;
+}
+.t_option1{
+  display: flex;
+  align-items:center;
+  flex-direction: row;
+}
+
+/* 评论帖子 */
+
+/* 外围框框 */
+.d_post{
+  width: 725rpx;
+  padding: 10rpx;  /* 间距 */
+  border-radius: 5rpx;
+  background-color: #ffffff00;
+  border-radius: 20rpx;  /* 圆角的大小 */
+}
+.d_post1{
+  width: 98%;
+  padding: 10rpx;  /* 间距 */
+  border-radius: 5rpx;
+  background-color: #f8fcfb00;
+  border-radius: 20rpx;  /* 圆角的大小 */
+  box-shadow: 2rpx 2rpx 6rpx 6rpx #b2f1e7;
+} 
+/* 一级用户名时间栏 */
+.d_one{
+  display:flex;
+  flex-direction: row;
+  justify-content:flex-start;
+  line-height:13px;
+  margin:10rpx;
+}
+.d_name{
+  font-size: 15px;
+  font-family:"楷体";
+}
+.d_time{
+  color: #9ca0a0;
+  font-size: 12px;
+  font-family:"楷体";
+}
+/* 二级评论内容 */
+.d_potxt{
+  font-size: 18px;
+  font-family:"楷体";
+  line-height:10rpx;
+}
+/* 三级操作列表（评论只有more） */
+.d_optext{
+  font-size: 18px;
+  font-family:"楷体";
+  line-height:30rpx;
+  color: #97a3a3;
+}
+.d_option{
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: 15rpx;
+  margin-right:15rpx;
+  align-items:baseline ;
+}
+/* .optext{
+  font-size: 18px;
+  font-family:"楷体";
+  line-height:30rpx;
+  color: #97a3a3;
+} */
+/* 
+.img-button{
+  padding: 0;
+  border: none;
+} */

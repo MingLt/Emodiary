@@ -1,0 +1,47 @@
+<!--components/post_message/post_message.wxml-->
+<view class="t_post">
+  <view class="t_post1">
+    <navigator url="/pages/detail/detail" open-type="navigate" class="t_post2">
+
+      <!-- 用户名 & 时间 -->
+      <view class="t_one">
+
+        <text class="t_name">
+          {{name}}
+        </text>
+
+        <text class="t_time">
+          {{time}}
+        </text>
+        
+      </view>
+
+      <!-- 文章内容 -->
+      <view class="t_two">
+        <text class="t_potxt">
+          {{post_text}}
+        </text>
+      </view>
+    </navigator>
+    
+    <!-- 操作列表 -->
+    <view class="t_option">
+      <view class="t_option1">
+        <dianzan bindtap="add_dianzan" ></dianzan>
+        <text>{{zan}}</text>
+        <text decode="true" class="optext"> &nbsp; &nbsp;</text>
+        <comment bindnumChange="numChange"></comment>
+        <text decode="true">&nbsp;</text>
+        <text>{{comment}}</text>
+        <text decode="true"> &nbsp; &nbsp; &nbsp;</text>
+        <collect bindnumChange="numChange"></collect>
+        <text>{{collect}}</text>
+      </view>
+      <view class="t_option2">
+        <more></more>
+      </view>
+    </view>
+    
+  </view>  
+
+</view>

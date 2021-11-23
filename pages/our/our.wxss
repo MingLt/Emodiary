@@ -1,0 +1,21 @@
+/* pages/our/our.wxss */
+.our{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.logo{
+  height: 300rpx;
+  position: relative;
+  margin:20px;
+}
+.intro{
+  margin:40rpx;
+  display: block;
+  /* height: 200rpx; */
+  width: 600rpx;
+  line-height:24px;
+}
+page{
+  background-image: url(https://img2020.cnblogs.com/blog/2529663/202111/2529663-20211116201833436-341787871.jpg);
+}

@@ -1,0 +1,76 @@
+/* 最外层：树洞帖子 */
+.t_post{
+  width: 725rpx;
+  padding: 10rpx;  /* 间距 */
+  border-radius: 5rpx;
+  background-color: #ffffff00;
+  border-radius: 20rpx;  /* 圆角的大小 */
+}
+.t_post1{
+  width: 98%;
+  padding: 10rpx;  /* 间距 */
+  border-radius: 5rpx;
+  background-color: #effaf900;
+  border-radius: 20rpx;  /* 圆角的大小 */
+  box-shadow: 2rpx 2rpx 6rpx 6rpx #caf2f3;
+} 
+
+/* 次外层：可链接详情的导航框 包含Id, time,post_text */
+.t_post2 {
+  height: 99.9%;
+  width: 99.9%;
+  justify-content: left;
+  align-items: top;
+  border-radius: 20rpx; 
+}
+
+/* 第一栏：id,time */
+.t_one{
+  display:flex;
+  flex-direction: row;
+  justify-content:space-between ;
+  line-height:13px;
+  margin:10rpx;
+}
+.t_name{
+  
+  font-size: 21px;
+  font-family:"楷体";
+}
+.t_time{
+  color: #9ca0a0;
+  font-size: 16px;
+}
+
+/* 第二栏：post_text */
+.t_potxt{
+  font-size: 18px;
+  font-family:"楷体";
+  line-height:30rpx;
+}
+
+/* 第三栏：操作列表 */
+.t_option{
+  display: flex;
+  align-items:centers;
+  flex-direction: row;
+  justify-content:space-between ;
+  margin:15rpx;
+}
+.t_option1{
+  display: flex;
+  align-items:center;
+  flex-direction: row;
+}
+
+/* .optext{
+  font-size: 18px;
+  font-family:"楷体";
+  line-height:30rpx;
+  color: #97a3a3;
+} */
+/* 
+.img-button{
+  padding: 0;
+  border: none;
+} */

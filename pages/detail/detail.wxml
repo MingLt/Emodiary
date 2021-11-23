@@ -1,0 +1,100 @@
+<!--pages/detail/detail.wxml-->
+<image class="bg" src="../../images/backg.png"></image>
+<view>
+  <view>
+    <!--树洞帖子-->
+    <view class="t_post">
+      <view class="t_post1">
+        <view class="t_post2">
+
+          <!-- 用户名 & 时间 -->
+          <view class="t_one">
+
+            <text class="t_name">
+              {{name}}
+            </text>
+
+            <text class="t_time">
+              {{content_wrap.time}}
+            </text>
+            
+          </view>
+
+          <!-- 文章内容 -->
+          <view class="t_two">
+            <text class="t_potxt">
+              {{content_wrap.content}}
+            </text>
+          </view>
+        </view>
+        
+        <!-- 操作列表 -->
+        <view class="t_option">
+          <view class="t_option1">
+            <dianzan bindtap="add_dianzan" ></dianzan>
+            <text>{{content_wrap.likes}}</text>
+            <text decode="true" class="optext"> &nbsp; &nbsp;</text>
+            <comment bindtap="editDairy"></comment>
+            <text decode="true">&nbsp;</text>
+            <text>{{content_wrap.comments}}</text>
+            <text decode="true"> &nbsp; &nbsp; &nbsp;</text>
+            <collect bindtap="add_collect"></collect>
+            <text>{{content_wrap.collects}}</text>
+          </view>
+          <view class="t_option2">
+            <more></more>
+          </view>
+        </view>
+        
+      </view>  
+
+    </view>
+    <!-- <post_message name="{{name}}" post_text="{{post_text}}" time="{{time}}" zan="{{zan}}" comment="{{comment}}" collect="{{collect}}" >
+      </post_message> -->
+  </view>
+
+  <!--" 全部评论" -->
+  <view class="tev">
+    <text class="tet" >全部评论</text>
+  </view>
+
+  <!-- 评论区 -->
+  <view wx:for="{{array}}" wx:key="index">
+    <!--components/post_message/post_message.wxml-->
+      <view class="d_post">
+        <view class="d_post1">
+            <!-- 用户名 & 时间 -->
+            <view class="d_one">
+              <text class="d_name">
+                {{name}}
+              </text>
+              <text decode="true" class="d_optext"> &nbsp;</text>
+              <text class="d_time">
+                {{item.time}}
+              </text>
+              
+            </view>
+
+            <!-- 评论内容 -->
+            <view class="d_two">
+              <text class="d_potxt">
+                {{item.comment_content}}
+              </text>
+            </view>
+          
+          <view class="d_option">
+            <more></more>
+          </view>
+        </view>  
+
+      </view>
+
+    </view>
+    <!-- <com_detail com_name="{{item.com_name}}" com_text="{{item.com_text}}"com_time="{{item.com_time}}" >
+    </com_detail> -->
+    
+  
+  
+  <image class="round-click" bindtap="editDairy" src="../../image/click1.png"></image>
+
+</view>

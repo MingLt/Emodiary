@@ -1,0 +1,3 @@
+<button class="tapbtn1" plain="true" url="../../pages/search_result/search_result" >
+  <image class="tapimg1" bindtap="editDairy"  src="click1.png" ></image>
+</button>
