@@ -1,23 +1,29 @@
 <image class="bg" src="../../images/backg.png"></image>
+
+
+
 <view class="container">
   <view class="page-body">
     <view>
       <image class="weather" src="../../images/sun1.png"></image>
     </view>
     <div class="datebox">
-      <view style="width:250rpx ;font-size: x-large;">{{month}}月</view>
-      <view style="width:250rpx;font-size: large;color:#666;">{{year}}年</view>
+      <view style="width:250rpx ;font-size: x-large;z-index:-3;">{{month}}月</view>
+      <view style="width:250rpx;font-size: large;color:#666;z-index:-3;">{{year}}年</view>
     <text class="diasta">日记统计</text>
     </div>
   </view>
 </view>
-<view class="selector">
-  <view class="s_click">全部</view>
-  <view class="s_click">焦虑</view>
-  <view class="s_click">悲伤</view>
-  <view class="s_click">难过</view>
-  <view class="s_click">气愤</view>
-</view>
+<!--首页导航-->
+<view class="nav_wrap">
+    <!--自己滚动区域的组件-->
+    <scroll-view class="nav" scroll-x >
+      <view bindtap="activeNav" data-index="{{index}}" 
+      class="nav_item {{index===currentIndexNav?'active':''}}" 
+      wx:for="{{navList}}" wx:key="index" >{{item}}
+      </view>
+    </scroll-view>
+  </view>
 
 <view class="listview-container margin_bottom">
 <block wx:if="{{array.length}}">
@@ -50,4 +56,4 @@
 
 <image class="round-click" bindtap="editDairy" src="../../images/click3.png"></image>
 
-<eat wx:if="{{flag1}}" id="eat" class="monster-eat"></eat>
+<eat id="eat" tags="{{tags}}" class="monster-eat"></eat>

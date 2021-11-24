@@ -50,7 +50,7 @@ Component({
     // 弹窗内容
     content: {
       type: String,
-      value: '哗啦啦啦啦啦啦啦啦啦啦哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈或或或或或或或或哗啦啦啦啦啦啦啦啦啦啦哈哈哈哈哈哈哈哈哈哈哈'
+      value: '在人流中，我一眼就发现了你。我不敢说你是TA们中最漂亮的一个，可是我敢说，你是TA们中最出色的一个！'
     },
     // 弹窗取消按钮文字
     btn_no: {
@@ -98,11 +98,12 @@ Component({
         },
         success:function(res){
           // that.data.content=res.data.content;
-          that.setData({
-            content:res.data.data.content
-          })
-          //that.data.pushList=res.data
-          // console.log(res.data)
+          if(res.data.msg!="没有相关推送")
+          {
+            that.setData({
+              content:res.data.data.content
+            })
+          }
         },
         fail:function(res){
           console.log("请求推送失败")
@@ -134,6 +135,11 @@ Component({
     * triggerEvent 用于触发事件
     */
     _error () {
+      //触发取消回调
+      this.hidePopup();
+      // this.triggerEvent("error")
+    },
+    _uninterested() {
       //触发取消回调
       this.hidePopup();
       // this.triggerEvent("error")

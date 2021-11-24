@@ -24,6 +24,7 @@ Page({
     
   },
   onLoad() {
+    this.ishaveInfo()
     if (wx.getUserProfile) {
       this.setData({
         canIUseGetUserProfile: true,
@@ -102,7 +103,28 @@ Page({
     handleUserInfo (data) {
       
     },
-  
+    ishaveInfo:function(){
+
+      try {
+        var value = wx.getStorageSync('myuserInfo')
+        var value1 = wx.getStorageSync('myuserID')
+        if (value && value1) {
+         app.globalData.userInfo=value
+          app.globalData.userID=value1
+          wx.reLaunch({
+            url: '../diary/diary',
+            })
+          // console.log(value)
+            // Do something with return value
+        }
+      } catch (e) {
+        wx.showToast({
+          title: '获取本地缓存失败',
+          icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+          duration: 1500     
+        })
+      }
+    },
 
   getUserInfo(e) {
     // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息

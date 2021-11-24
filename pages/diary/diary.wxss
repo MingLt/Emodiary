@@ -1,6 +1,7 @@
 .container{
   padding: 40rpx 0;
 }
+
 .bg{
   width: 100%;
   height: 100%;
@@ -8,6 +9,33 @@
   background-size:100% 100%;
   z-index: -9;
   filter: blur(3rpx);
+}
+.nav{
+  white-space: nowrap;
+  padding: 5rpx;
+
+}
+.nav_item{
+  text-align: center;
+  height:40rpx;
+  border-radius: 30rpx;
+  padding: 10rpx 45rpx;
+  font-size: 30rpx;
+  display: inline-block;
+  color:#999;
+}
+.nav-img{
+  width:100rpx;
+  height:100rpx;
+}
+/* .navtext{
+  padding-top: 3rpx;
+} */
+/*粗度5rpx 实线 粉色*/
+.nav_item.active{
+  /* border-bottom: 5rpx solid #de688d; */
+  background-color: #75deec;
+  color:#fff;
 }
 .page-body{
   display: flex;
@@ -26,8 +54,6 @@
   to {transform: rotate(360deg)}
 }
 .datebox{
-  position:fixed;
-  top:50rpx;
   width:500rpx;
   display:flex;
   left:110rpx;

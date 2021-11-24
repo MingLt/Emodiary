@@ -22,16 +22,22 @@ Page({
   
   //评论编辑函数
   editDairy:function(){
-    if (app.globalData.userInfo!=null) {
-      // 已经授权
-      wx.navigateTo({
-        url: '../writesss/writesss',
-      })
-    }else{
-       wx.reLaunch({
-        url: '../login1/login1',
-        })
-    }
+    wx.getSetting({
+      success (res){
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权
+          console.log('已经授权');
+          wx.navigateTo({
+            url: '../writesss/writesss',
+          })
+        }else{
+          console.log('未授权');
+          wx.navigateTo({
+            url: '../login2/login2',
+          })
+        }
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面加载

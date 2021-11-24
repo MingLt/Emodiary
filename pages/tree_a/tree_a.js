@@ -173,16 +173,22 @@ onReachBottom: function () {
 
   // 编辑树洞帖子
   editDairy:function(){
-    if (app.globalData.userInfo!=null) {
-      // 已经授权
-      wx.navigateTo({
-        url: '../writes/writes',
-      })
-    }else{
-       wx.reLaunch({
-        url: '../login1/login1',
-        })
-    }
+    wx.getSetting({
+      success (res){
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权
+          console.log('已经授权');
+          wx.navigateTo({
+            url: '../writes/writes',
+          })
+        }else{
+          console.log('未授权');
+          wx.navigateTo({
+            url: '../login2/login2',
+          })
+        }
+      }
+    })
   },
   
   //点赞

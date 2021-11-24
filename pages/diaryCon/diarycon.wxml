@@ -12,8 +12,8 @@
   </view>
 </view>
 <view class="myemo">
+  <image class="emotion" src="../../images/scraps.png"></image>
   <view class="mye">我的心情：{{mood}}</view>
-  <image class="emotion" src="../../icon/悲伤.png"></image>
 </view>
 <view class="botBtn">
   <!-- <view class="botBtn1"><view  class="editbot">编辑</view>

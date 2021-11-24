@@ -36,55 +36,43 @@ Page({
     wx.setStorageSync('s_month', this.data._month+1);
     wx.setStorageSync('s_content', this.data.neirong);
     wx.setStorageSync('s_time', this.data.specific_t);
-    if (this.data.neirong)
-    {
-      wx.request({
-        url: 'https://luckym.top//treeHole/write',
-        method: 'post',
-        data: {
-          content:this.data.neirong,
-          user_id:app.globalData.userID,
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success (res) {
-          console.log(res.data)
-          wx.showToast({
-            title: '发布成功',
-            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
-            duration: 2000     
-          })
-          that.setData({
-            tree_hole_id: res.data.tree_hole_id,
-             })
-             app.globalData.release=true;//发布成功
-          setTimeout(function(){
-            wx.navigateBack({
-              delta: 1
-            })  
-          }.bind(this),2000)        
-          
-        },
-        fail (){
-          console.log("保存日记数据失败")
-          wx.showToast({
-            title: '发布失败',
-            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
-            duration: 2000     
+    wx.request({
+      url: 'https://luckym.top//treeHole/write',
+      method: 'post',
+      data: {
+        content:this.data.neirong,
+        user_id:app.globalData.userID,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success (res) {
+        console.log(res.data)
+        wx.showToast({
+          title: '发布成功',
+          icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+          duration: 2000     
+        })
+        that.setData({
+          tree_hole_id: res.data.tree_hole_id,
+           })
+           app.globalData.release=true;//发布成功
+        setTimeout(function(){
+          wx.navigateBack({
+            delta: 1
           })  
-        }
-      })
-    }
-    else
-    {
-      wx.showToast({
-        title: '当前内容为空，发布失败',
-        icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
-        duration: 1500     
-      })
-    }
-
+        }.bind(this),2000)        
+        
+      },
+      fail (){
+        console.log("保存日记数据失败")
+        wx.showToast({
+          title: '发布失败',
+          icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+          duration: 2000     
+        })  
+      }
+    })
    
     
     

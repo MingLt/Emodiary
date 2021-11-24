@@ -41,6 +41,22 @@ Page({
       {
         id: 3,
         name: '无语'
+      },
+      {
+        id: 4,
+        name: '失望'
+      },
+      {
+        id: 5,
+        name: '崩溃'
+      },
+      {
+        id: 6,
+        name: '委屈'
+      },
+      {
+        id: 7,
+        name: '日记'
       }
     ],
     objectIndex: 0,
@@ -57,9 +73,8 @@ Page({
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       objectIndex: e.detail.value,
-      
     })
-    this.mood=this.data.objectArray[this.objectIndex].name;
+   this.data.mood=this.data.objectArray[this.data.objectIndex].name
   },
   UpdateDate(){
     this.setData({
@@ -230,52 +245,46 @@ Page({
 
   editsuccess:function()
   {
-    if (!this.data.neirong)
+    wx.request({
+      url: 'https://luckym.top/diary/addDiary/',
+      method: 'post',
+      data: {
+        diary_content:this.data.neirong,
+	      tips:this.data.mood,
+        user_id:app.globalData.userID,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success (res) {
+        console.log(res.data)
+      },
+      fail (){
+        console.log("保存日记数据失败")
+      }
+    })
+    app.globalData.diasucc=true;
+    wx.showToast({
+      title: '保存成功',
+      icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+      duration: 1500     
+    })
+    var mymood='';
+    if(this.data.mood=='日记')
     {
-      wx.showToast({
-        title: '当前内容为空，保存失败',
-        icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
-        duration: 1500     
-      })
+      mymood='治愈';
     }
     else{
-      wx.request({
-        url: 'https://luckym.top/diary/addDiary/',
-        method: 'post',
-        data: {
-          diary_content:this.data.neirong,
-          tips:this.data.mood,
-          user_id:app.globalData.userID,
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success (res) {
-          console.log(res.data)
-          app.globalData.diasucc=true;
-      wx.showToast({
-        title: '保存成功',
-        icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
-        duration: 1500     
-      })
-      
-      setTimeout(function(){
-        wx.navigateBack({
-          delta: 1
-        })  
-      }.bind(this),1500)
-        },
-        fail (){
-          console.log("保存日记数据失败")
-          wx.showToast({
-            title: '保存失败，请重试',
-            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
-            duration: 1500     
-          })
-        }
-      })
-      
+      mymood=this.data.mood;
     }
-  
+    wx.setStorage({
+      key: 'mymood',
+      data:mymood,
+    }),
+    setTimeout(function(){
+      wx.navigateBack({
+        delta: 1
+      })  
+    }.bind(this),1500)
   }
 })

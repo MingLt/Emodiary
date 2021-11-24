@@ -2,7 +2,7 @@ const date = new Date()
 const years = []
 const months = []
 const days = []
-var app = getApp()
+const app = getApp()
 for (let i = 1990; i <= date.getFullYear(); i++) {
   years.push(i)
 }
@@ -32,6 +32,18 @@ Page({
     isDaytime: true,  //
     array:[],
     current:[],
+    currentIndexNav:0,
+    navList:['全部','悲伤','生气','焦虑','无语','失望','崩溃','委屈','日记'],
+    navimg:['../../icon/smile.png',
+    '../../icon/sad.png',
+    '../../icon/angry.png',
+    '../../icon/nervous.png',
+    '../../icon/speechless.png',
+    '../../icon/disappoint.png',
+    '../../icon/cry.png',
+    '../../icon/grievance.png',
+    '../../icon/diaryicon.png',
+    ]
   },
   bindChange(e) {
     const val = e.detail.value
@@ -68,7 +80,11 @@ Page({
 
   onLoad: function () {
     //定时器用来请求日记数据
-    this.startSetInter();
+   //定时器用来请求日记数据
+   if(app.globalData.userInfo!=null)
+   {
+      this.startSetInter();
+   }
   },
   //启用定时器
   startSetInter: function () {
@@ -84,132 +100,39 @@ queryRemindCount: function () {
   if (app.globalData.userID == null) {
     return
   }
-  var that = this;
-  wx.request({
-        url: 'https://luckym.top/diary/getAll',
-        method: 'get',
-        data: {
-          page: 1,
-          per_page:7,
-          user_id:app.globalData.userID,
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success (res) {
-          that.setData({
-            array:res.data.all_diary,
-          })
-          clearInterval(that.data.setInter) // 关闭定时器
-        },
-        fail (){
-          wx.showToast({
-            title: '获取日记失败，请稍后重试',
-            icon:'none',
-            duration:2500,
-          })
-        }
-      })
+  
+    clearInterval(this.data.setInter) // 关闭定时器
+    this.getalldiary()
+  
 },
 
   onShow:function(){
     var that=this;
     if(app.globalData.deleteDiary){
-      this.setData({
-        pageNum:1
-      })
-      wx.request({
-        url: 'https://luckym.top/diary/getAll',
-        method: 'get',
-        data: {
-          page: 1,
-          per_page:7,
-          user_id:app.globalData.userID,
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success (res) {
-          if(res.data.msg=="没有数据")
-          {
-            that.setData({
-            array:[],
-          })
-          }
-          else{
-             that.setData({
-            array:res.data.all_diary,
-          })
-          }
-        },
-        fail (){
-          wx.showToast({
-            title: '获取失败，请稍后重试',
-            icon:'none',
-            duration:2500,
-          })
-        }
-      })
-      // that.data.array.splice(this.data.idkey,1);
-      // that.setData({
-      //   array:that.data.array,
-      // })
+      app.globalData.deleteDiary=false
+      if(this.data.currentIndexNav!=0)
+      {
+        this.gettagsdiary()
+      }
+      else{
+        this.getalldiary()
+      }
     }
-  //   var dayy,contentt,Yearr, Monthh,Timee1,moodd,arr=[];
-  //   if( app.globalData.diasucc){
-  //     // app.globalData.diasucc=false;
-  //     this.setData({
-  //    day:wx.getStorageSync("w_day"),
-  //    month:wx.getStorageSync("w_month"),
-  //    year:wx.getStorageSync("w_year"),
-  //  });
-  //  contentt=wx.getStorageSync("w_content");
-  //  dayy=wx.getStorageSync("w_day");
-  //    Yearr=wx.getStorageSync("w_year");
-  //    Monthh=wx.getStorageSync("w_month");
-  //    Timee1=wx.getStorageSync("w_time");
-  //    moodd=wx.getStorageSync("w_mood");
-  //    let temp={'year':Yearr,
-  //    'month':Monthh,
-  //    'day':dayy,
-  //    'time':Timee1,
-  //    'content':contentt,
-  //    'mood':moodd,};
-  //  arr=this.data.array;
-  //  arr.unshift(temp);
-  //  this.setData({
-  //   array:arr,
-  //  })
     this.eat = this.selectComponent("#eat"); //组件的id
     if( app.globalData.diasucc)//保存成功
     {
-      this.setData({
+      var mymood = wx.getStorageSync('mymood')
+      that.setData({
+        tags:mymood,
         pageNum:1
       })
-      wx.request({
-        url: 'https://luckym.top/diary/getAll',
-        method: 'get',
-        data: {
-          page: this.data.pageNum,
-          per_page:7,
-          user_id:app.globalData.userID,
-        },
-        header: {
-          'content-type': 'application/json' // 默认值
-        },
-        success (res) {
-          that.setData({
-            array:res.data.all_diary,
-          })
-        },
-        fail (){
-          wx.showToast({
-            title: '获取失败，请稍后重试',
-            icon:'none',
-            duration:2500,
-          })
-        }
-      })
+      if(this.data.currentIndexNav!=0)
+      {
+        this.gettagsdiary()
+      }
+      else{
+        this.getalldiary()
+      }
       app.globalData.deleteDiary=false;
       this.eat.showEat();
       setTimeout(function(){
@@ -225,51 +148,143 @@ queryRemindCount: function () {
 //获取列表失败的回调函数
 getNoticeList(){
   //请求
-  var that=this
-  wx.request({
-    url: 'https://luckym.top/diary/getAll',
-    method: 'get',
-    data: {
-      page: this.data.pageNum,
-      per_page:7,
-      user_id:app.globalData.userID,
-    },
-    header: {
-      'content-type': 'application/json' // 默认值
-    },
-    success (res) {
-      if (that.data.pageNum == 1) {
-        that.setData({
-          array: res.data.all_diary,
-         })
-      } else {
-        //获取原始列表
-          let noticeList = that.data.array;
-          //获取新列表
-          let arr = res.data.all_diary;
-          //新列表数据与原列表数据合并
-          let newArr = noticeList.concat(arr);
-          console.log(arr)
-          if(arr!=undefined)
-          {
-            that.setData({
-                array: newArr,
-            })
-          }   
-      }
-    },
-    fail (){
-      wx.showToast({
-        title: '获取失败，请稍后重试',
-        icon:'none',
-        duration:2500,
-      })
-    }
-  })
+  if(this.data.currentIndexNav!=0)
+  {
+    this.gettagsdiary()
+  }
+  else{
+    this.getalldiary()
+  }
 },
 //页面上拉触底事件的处理函数
 onReachBottom: function () {
   this.onBottom();
 },
 //触底响应函数，监听下拉加载-----------------------------------^^^^^^^^^^>>>>>>>
+/**
+   * 当前激活的导航栏选项
+   */
+  getalldiary:function(){
+    var that = this;
+    wx.request({
+      url: 'https://luckym.top/diary/getAll',
+      method: 'get',
+      data: {
+        page: this.data.pageNum,
+        per_page:7,
+        user_id:app.globalData.userID,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success (res) {
+        if (that.data.pageNum == 1) {
+          if(res.data.all_diary!=undefined)
+          {
+            that.setData({
+              array: res.data.all_diary,
+             })
+          }
+          else{
+            that.setData({
+              array: [],
+             })
+          }  
+        } else {
+          //获取原始列表
+            let noticeList = that.data.array;
+            //获取新列表
+            let arr = res.data.all_diary;
+            //新列表数据与原列表数据合并
+            let newArr = noticeList.concat(arr);
+            if(arr!=undefined)
+            {
+              that.setData({
+                  array: newArr,
+              })
+            }   
+        }
+      },
+      fail (){
+        wx.showToast({
+          title: '获取失败，请稍后重试',
+          icon:'none',
+          duration:2500,
+        })
+      }
+    })
+  },
+  gettagsdiary:function(){
+    var that = this;
+    wx.request({
+      url: 'https://luckym.top/diary/getByTips',
+      method: 'get',
+      data: {
+        page: this.data.pageNum,
+        tips:this.data.navList[this.data.currentIndexNav],
+        per_page:7,
+        user_id:app.globalData.userID,
+      },
+      header: {
+        'content-type': 'application/json' // 默认值
+      },
+      success (res) {
+        if (that.data.pageNum == 1) {
+          if(res.data.all_diary!=undefined)
+          {
+            that.setData({
+              array: res.data.all_diary,
+             })
+          }
+          else{
+            that.setData({
+              array: [],
+             })
+          }   
+        } else {
+          //获取原始列表
+            let noticeList = that.data.array;
+            //获取新列表
+            let arr = res.data.all_diary;
+            //新列表数据与原列表数据合并
+            let newArr = noticeList.concat(arr);
+            console.log(arr)
+            if(arr!=undefined)
+            {
+              that.setData({
+                  array: newArr,
+              })
+            }   
+        }   
+      },
+      fail (){
+        wx.showToast({
+          title: '获取失败，请稍后重试',
+          icon:'none',
+          duration:2500,
+        })
+      }
+    })
+  },
+  activeNav: function(e){
+    //console.log(e);
+    // 绑定当前选中的菜单项索引号
+    this.setData({
+      currentIndexNav: e.currentTarget.dataset.index,
+      pageNum:1,
+      array: [],
+    })
+    if(app.globalData.userInfo!=null)
+   {
+      if(this.data.currentIndexNav!=0)
+      {
+        this.gettagsdiary()
+        
+      }
+      else{
+        this.getalldiary()
+       
+      }
+   }
+  },
 })
