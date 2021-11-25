@@ -124,6 +124,7 @@ transform-origin: 70% 500%;
   /* text-align: center; */
   text-indent:2em;
   color: #444;
+  font-size: 35rpx;
 }
 .happy{
   width:300rpx;
@@ -148,7 +149,8 @@ transform-origin: 70% 500%;
   bottom:5%;
 }
 .btn-no{
-  padding-top: 10rpx;
+  font-size: 35rpx;
+  padding-top: 15rpx;
   text-align: center;
   height:80rpx;
   color:white;
@@ -158,8 +160,8 @@ transform-origin: 70% 500%;
   border-radius: 30rpx;
 }
 .btn-noo{
-  padding-top: 10rpx;
-
+  padding-top: 15rpx;
+  font-size: 35rpx;
   text-align: center;
   height:80rpx;
   color:rgb(101, 190, 179);

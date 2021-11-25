@@ -24,7 +24,7 @@ Page({
     day: date.getDate(),
     neirong:"",
     specific_t:'',
-    mood:'悲伤',
+    mood:'治愈',
     objectArray: [
       {
         id: 0,
@@ -270,11 +270,8 @@ Page({
       duration: 1500     
     })
     var mymood='';
-    if(this.data.mood=='日记')
+    if(this.data.mood!='日记')
     {
-      mymood='治愈';
-    }
-    else{
       mymood=this.data.mood;
     }
     wx.setStorage({

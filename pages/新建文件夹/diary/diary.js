@@ -17,7 +17,6 @@ for (let i = 1; i <= 31; i++) {
 
 Page({
   data: {
-    scrollTop:1000,
     scrollLeft:0,
     pageNum:1,
     setInter: '', 
@@ -46,11 +45,6 @@ Page({
     '../../icon/grievance.png',
     '../../icon/diaryicon.png',
     ]
-  },
-  onPageScroll: function (e) {//监听页面滚动
-    this.setData({
-      scrollTop: e.scrollTop
-    })
   },
   bindChange(e) {
     const val = e.detail.value

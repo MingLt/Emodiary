@@ -9,13 +9,6 @@
   background-size:100% 100%;
   z-index: -9;
 }
-.topnavFixed{
-  white-space: nowrap;
-  padding: 5rpx;
-  margin-right: 10rpx;
-  position:fixed;
-   top:0rpx;
-}
 .nav{
   white-space: nowrap;
   padding: 5rpx;
@@ -101,7 +94,7 @@
   width: 90rpx;
   border-radius: 100%;
     position: fixed;
-    bottom: 80rpx;
+    top: 40rpx;
     right: 30rpx;
     display: flex;
     align-items: center;

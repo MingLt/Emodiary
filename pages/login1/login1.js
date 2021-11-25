@@ -81,9 +81,9 @@ Page({
             this.setData({
               hasUserInfo: true
             }),
-              wx.reLaunch({
-              url: '../diary/diary'
-            }),
+            wx.reLaunch({
+              url: '../diary/diary',
+              })
             resolve(res)
           }
         })

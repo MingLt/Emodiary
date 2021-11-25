@@ -21,14 +21,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this;
-    if (app.globalData.userInfo!=null) {
-      that.setUserInfo(app.globalData.userInfo);
-    } 
+    // var that = this;
+    // if (app.globalData.userInfo!=null) {
+    //   that.setUserInfo(app.globalData.userInfo);
+    // } 
   },
   ishaveuserInfo:function(){
     if (app.globalData.userInfo==null) {
-      wx.reLaunch({
+      wx.navigateTo({
         url: '../login1/login1',
         })
     } 
@@ -39,6 +39,12 @@ Page({
         hasUserInfo: true
       })
   },
+  onShow:function(){
+    var that = this;
+    if (app.globalData.userInfo!=null) {
+      that.setUserInfo(app.globalData.userInfo);
+    } 
+  }
  
 
 })

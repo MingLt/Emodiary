@@ -22,10 +22,10 @@
 <view class="wx-popup-con">{{content}}</view>
 <image class="happy" src="../../icon/doge.png"></image>
 <!-- <text class="btn-more" bindtap='_success'>{{btn_ok}}</text> -->
-<div class="btn-nowrap">
+<view class="btn-nowrap">
 <button class="btn-no" style="width:300rpx;margin-right: 20rpx;" bindtap='_error'>开心啦</button>
 <button class="btn-noo" style="width:300rpx;" bindtap='_uninterested'>不感兴趣</button>
-</div>
+</view>
 
 <!-- <image class="btn-close" bindtap='_error' src="../../images/no.png"></image> -->
 </view>
