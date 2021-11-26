@@ -24,7 +24,7 @@ Page({
     day: date.getDate(),
     neirong:"",
     specific_t:'',
-    mood:'治愈',
+    mood:'悲伤',
     objectArray: [
       {
         id: 0,
@@ -245,6 +245,7 @@ Page({
 
   editsuccess:function()
   {
+    var that=this;
     wx.request({
       url: 'https://luckym.top/diary/addDiary/',
       method: 'post',
@@ -258,30 +259,48 @@ Page({
       },
       success (res) {
         console.log(res.data)
+        if(res.data.msg=="未通过敏感词检测")
+        {
+          wx.showToast({
+            title: '未通过敏感词检测',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })          
+        }
+        else
+        {
+          app.globalData.diasucc=true;
+          var mymood='';
+          if(that.data.mood!='日记')
+          {
+            mymood=that.data.mood;
+          }
+          wx.setStorage({
+            key: 'mymood',
+            data:mymood,
+          }),
+          wx.showToast({
+            title: '保存成功',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })
+          setTimeout(function(){
+            wx.navigateBack({
+              delta: 1
+            })  
+          }.bind(this),1500)
+        }
+        
       },
       fail (){
-        console.log("保存日记数据失败")
+        console.log("保存日记数据失败")     
+          wx.showToast({
+            title: '保存失败，请重试',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })       
       }
     })
-    app.globalData.diasucc=true;
-    wx.showToast({
-      title: '保存成功',
-      icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
-      duration: 1500     
-    })
-    var mymood='';
-    if(this.data.mood!='日记')
-    {
-      mymood=this.data.mood;
-    }
-    wx.setStorage({
-      key: 'mymood',
-      data:mymood,
-    }),
-    setTimeout(function(){
-      wx.navigateBack({
-        delta: 1
-      })  
-    }.bind(this),1500)
+
   }
 })

@@ -1,25 +1,80 @@
 /* pages/write/write.wxss */
-.picker{
-  margin-top: 24rpx;
-  margin-left: 30rpx;
+.choosemood{
+  display:flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.pickers{
+  position: relative;
+  top: 14rpx;
+  left: -50rpx;
+  /* right: 45rpx; */
   font-family: PingFangSC-Medium;
-  font-size: 38rpx;
+  font-size: 28rpx;
   color: #46bccc;
 }
-.wri{
-  margin: 30px;
-  /* text-align: center; */
-  border:1px solid #ddd;
-  height: 600rpx;
-}
-.botsum{
+.date {
+  top: 14rpx;
+  left: 50rpx;
   position: relative;
-  top: 200rpx; 
-  left:450rpx;
+  font-family: PingFangSC-Medium;
+  font-size: 28rpx;
+  color: #000000;
+  border-right: 4rpx solid transparent;
+  background-color: #e2f2f5;
+  border-radius: 3px;
+}
+
+.wri{
+  margin: 10rpx 60rpx 30rpx;
+  /* text-align: center; */
+  border:none;
+  line-height:65rpx;
+  font-size: 30rpx;
+  position: relative;
+  top:30rpx;
+  /* width:100%;  */
+  /* overflow : visible ; */
+}
+
+textarea{
+  width: 620rpx;
+  height:200px;
+  overflow: visible;
+  letter-spacing:8em;
+  word-break: break-all;
+  word-wrap: break-word;
+} 
+.save{
+  width: 268rpx;
+  height: 266rpx;
+  padding:0 20rpx;
+  position: fixed;
+  left: 500rpx;
+  bottom: 90rpx;
+  margin: auto;
+  background-size: 188rpx 186rpx;
+  background-repeat:no-repeat;
+}
+button[plain]{ border:0 }
+.botsum{
+  
   font-size: 25rpx;
   color: rgb(140, 140, 140);
  }
-.bcwrap{
+ .count{
+  position: fixed;
+  bottom: 90rpx;
+  left:200rpx;
+ }
+ .pic{
+   height: 386rpx;
+   width: 404rpx;
+   position:fixed; 
+   bottom: 100rpx;
+ }
+/* .bcwrap{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,6 +85,17 @@
   z-index:9;
   left:20%;
   bottom:25rpx;
+} */
+page{
+  background: #D9EBEF;
+}
+.paperwrap{
+ margin-top: 35rpx;
+  background-color: #ffffff;
+  height: 100%;
+  width: 100%;
+  display:flex;                    
+  justify-content: center; 
 }
  .bc{
   /* height:100rpx; */
@@ -42,10 +108,13 @@
   letter-spacing: 15rpx;
   font-size: 45rpx;
  }
-
-/* page {
-  background-image: url(https://img2020.cnblogs.com/blog/2529663/202111/2529663-20211112174645527-277508701.png);
-} */
+.bg{
+  width: 100%;
+  height: 95%;
+  position:fixed; 
+  /* background-size:100% 100%; */
+  z-index: -1;
+}
 /* start 日期选择 */
 .date-select {
   width: 100%;
@@ -60,17 +129,7 @@
   position: relative;
 }
  
-.date {
-  display: inline-block;
-  margin-top: 24rpx;
-  margin-left: 30rpx;
-  font-family: PingFangSC-Medium;
-  font-size: 30rpx;
-  color: #000000;
-  border-right: 4rpx solid transparent;
-  background-color: #e2f2f5;
-  border-radius: 3px;
-}
+
  
 .day {
   font-family: PingFangSC-Medium;

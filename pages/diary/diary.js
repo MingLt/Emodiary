@@ -17,7 +17,6 @@ for (let i = 1; i <= 31; i++) {
 
 Page({
   data: {
-    scrollTop:1000,
     scrollLeft:0,
     pageNum:1,
     setInter: '', 
@@ -46,11 +45,6 @@ Page({
     '../../icon/grievance.png',
     '../../icon/diaryicon.png',
     ]
-  },
-  onPageScroll: function (e) {//监听页面滚动
-    this.setData({
-      scrollTop: e.scrollTop
-    })
   },
   bindChange(e) {
     const val = e.detail.value
@@ -109,12 +103,12 @@ queryRemindCount: function () {
   }
     clearInterval(this.data.setInter) // 关闭定时器
     this.getalldiary()
-  
 },
 
   onShow:function(){
     
     var that=this;
+    // console.log(this.data.currentIndexNav)
     if(app.globalData.deleteDiary){
       app.globalData.deleteDiary=false
       if(this.data.currentIndexNav!=0)
@@ -141,7 +135,6 @@ queryRemindCount: function () {
       setTimeout(function(){
         this.eat.hideEat();
       }.bind(this),3000)
-      this.totop()
     }
     
   },
@@ -211,6 +204,7 @@ onReachBottom: function () {
         }
       },
       fail (){
+        console.log(fail)
         wx.showToast({
           title: '获取失败，请稍后重试',
           icon:'none',

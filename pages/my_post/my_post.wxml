@@ -1,6 +1,6 @@
-<view >
-  <image class="bg" src="../../images/backg.png"></image>
- 
+<image class="bg" src="../../image/back.png"></image>
+<view  class="total">
+
   <!-- 帖子模块 -->
   <view>
     <!-- 循环输出帖子列表 -->
@@ -13,9 +13,12 @@
             <!-- 用户名 & 时间 -->
             <view class="one">
 
-              <text class="name">
-                {{name}}
-              </text>
+              <view class="user">
+                <!-- <head></head> -->
+                <image class="head" src='{{picNum[index%4]}}.png'></image>
+                <text class="name" decode="true">{{name[index%4]}}</text>
+              </view>
+              
 
               <text class="time">
                 {{item.time}}
@@ -46,8 +49,8 @@
               <collect bindtap="add_collect" data-id="{{index}} "></collect>
               <text>{{item.collects}}</text>
             </view>
-            <view class="option2">
-              <more></more>
+            <view class="option2"  bindtap="choiceop" data-id="{{index}}">
+              <delete></delete>
             </view>
           </view>
           

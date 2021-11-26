@@ -3,7 +3,8 @@ Page({
   data:{
     pageNum:1,
     array:[],
-    name:"匿名用户",
+    picNum:[1,3,2,0,2,1,3,0],
+    name:["小鳄鱼","小松鼠","长颈鹿","鸭鸭","长颈鹿","小鳄鱼","小松鼠","鸭鸭"]
   }, 
   onLoad:function(){
     var that=this;
@@ -270,6 +271,67 @@ onReachBottom: function () {
     })
   },
 
+  choiceop:function(event){
+    var that=this
+    console.log(event)
+    console.log(event.currentTarget.dataset.id)
+    var idkey=event.currentTarget.dataset.id;
+    this.setData({
+       idkey:idkey
+    })
+    wx.setStorageSync('hole_id', this.data.array[idkey].tree_hole_id);
+    wx.setStorageSync('u_id', this.data.array[idkey].user_id);
+    wx.showActionSheet({
+    itemList: ['确认删除'],//显示的列表项
+    success: function (res) { //res.tapIndex点击的列表项
+       console.log("点击了列表项：" + that[res.tapIndex])
+       console.log(res.tapIndex)
+       if(!(res.tapIndex)) {
+         console.log("确认删除")
+         wx.request({
+          url: 'https://luckym.top/treeHole/delete/',
+          method: 'post',
+          data: {
+            tree_hole_id: that.data.array[idkey].tree_hole_id,
+          },
+          header: {
+            'content-type': 'application/json' // 默认值
+          },
+          success (res) {
+
+            wx.redirectTo({
+              url: '../my_post/my_post',
+            })
+            wx.showToast({
+              title: '删除成功',
+              icon:'none',
+              duration:2500,
+            })
+          },
+          fail (){
+            wx.showToast({
+              title: '删除失败',
+              icon:'none',
+              duration:2500,
+            })
+          }
+        })
+    
+       }
+        
+       else{
+        console.log("取消删除")
+       }
+    },
+    fail: function (res) { 
+      console.log("操作失败")
+    },
+    complete:function(res){
+      console.log("操作完成")
+    }
+  })
+
+  },
 
   postContent:function(event){
     var idkey=event.currentTarget.dataset.id;

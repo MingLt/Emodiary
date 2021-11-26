@@ -6,10 +6,10 @@
       <image class="weather" src="../../images/sun1.png"></image>
     </view>
     <view class="datebox">
-      <view style="width:50%;font-size: 60rpx;">{{month}}月</view>
-      <view style="width:65%;font-size: 55rpx;color:#666;">{{year}}年</view>
+      <view style="width:50%;font-size: 70rpx;">{{month}}月</view>
+      <view style="width:65%;font-size: 60rpx;color:#666;">{{year}}年</view>
     </view>
-    <text class="diasta">日记统计</text>
+    <!-- <text class="diasta">日记统计</text> -->
   </view>
 </view>
 <!--首页导航-->

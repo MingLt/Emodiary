@@ -1,6 +1,7 @@
-var app = getApp()
+const app = getApp()
 Component({
   properties: {
+   
     url: {
       type: String,
       value: "http://m.qpic.cn/psc?/V513EChq0TBwUB2Wzg9r2UtSsk4U2iiH/45NBuzDIW489QBoVep5mcXCPpXYHtUtgAohcBOAc43twxAbl.6zv805Jw4GXqnsn7Nq4lXMAcRN8CVve5z.otR6JTEkOFlemROe1UDgkL.s!/b&bo=4QpVAQAAAAADN60!&rf=viewer_4",
@@ -86,7 +87,7 @@ Component({
     showEat: function () {
       //请求推送数据
       var that=this;
-      console.log(this.data.tags)
+      console.log(that.data.tags)
       wx.request({
         url: 'https://luckym.top/pushMsg',
         method: 'post',
@@ -94,16 +95,17 @@ Component({
           'content-type': 'application/json' // 默认值
         },
         data: {
+          user_id:app.globalData.userID,
           diary_tip:that.data.tags,
         },
         success:function(res){
           // that.data.content=res.data.content;
-          if(res.data.msg!="没有相关推送")
-          {
+          // if(res.data.msg!="没有相关推送")
+          // {
             that.setData({
               content:res.data.data.content
             })
-          }
+          // }
         },
         fail:function(res){
           console.log("请求推送失败")
@@ -136,11 +138,65 @@ Component({
     */
     _error () {
       //触发取消回调
+      var that=this;
+      wx.request({
+        url: 'https://luckym.top/like_pushMsg',
+        method: 'post',
+        header:{
+          'content-type': 'application/json' // 默认值
+        },
+        data: {
+          tip:that.data.tags,
+          is_like:1,
+          user_id:app.globalData.userID
+        },
+        success:function(res){
+          wx.showToast({
+            title: '收到你的好心情~',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })
+        },
+        fail:function(res){
+          wx.showToast({
+            title: '反馈推送结果失败',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })
+        }
+      })
       this.hidePopup();
       // this.triggerEvent("error")
     },
     _uninterested() {
       //触发取消回调
+      var that=this;
+      wx.request({
+        url: 'https://luckym.top/like_pushMsg',
+        method: 'post',
+        header:{
+          'content-type': 'application/json' // 默认值
+        },
+        data: {
+          tip:that.data.tags,
+          is_like:0,
+          user_id:app.globalData.userID
+        },
+        success:function(res){
+          wx.showToast({
+            title: '将减少此类推送',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })
+        },
+        fail:function(res){
+          wx.showToast({
+            title: '反馈推送结果失败',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })
+        }
+      })
       this.hidePopup();
       // this.triggerEvent("error")
     },

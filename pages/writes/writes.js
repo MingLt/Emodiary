@@ -36,43 +36,65 @@ Page({
     wx.setStorageSync('s_month', this.data._month+1);
     wx.setStorageSync('s_content', this.data.neirong);
     wx.setStorageSync('s_time', this.data.specific_t);
-    wx.request({
-      url: 'https://luckym.top//treeHole/write',
-      method: 'post',
-      data: {
-        content:this.data.neirong,
-        user_id:app.globalData.userID,
-      },
-      header: {
-        'content-type': 'application/json' // 默认值
-      },
-      success (res) {
-        console.log(res.data)
-        wx.showToast({
-          title: '发布成功',
-          icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
-          duration: 2000     
-        })
-        that.setData({
-          tree_hole_id: res.data.tree_hole_id,
-           })
-           app.globalData.release=true;//发布成功
-        setTimeout(function(){
-          wx.navigateBack({
-            delta: 1
-          })  
-        }.bind(this),2000)        
-        
-      },
-      fail (){
-        console.log("保存日记数据失败")
-        wx.showToast({
-          title: '发布失败',
-          icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
-          duration: 2000     
-        })  
-      }
-    })
+    if (this.data.neirong)
+    {
+      wx.request({
+        url: 'https://luckym.top//treeHole/write',
+        method: 'post',
+        data: {
+          content:this.data.neirong,
+          user_id:app.globalData.userID,
+        },
+        header: {
+          'content-type': 'application/json' // 默认值
+        },
+        success (res) {
+          console.log(res.data)
+          if(res.data.msg=="未通过敏感词检测")
+        {
+          wx.showToast({
+            title: '未通过敏感词检测',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })          
+        }
+        else
+        {
+          wx.showToast({
+            title: '保存成功',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })
+          that.setData({
+            tree_hole_id: res.data.tree_hole_id,
+             })
+             app.globalData.release=true;//发布成功
+          setTimeout(function(){
+            wx.navigateBack({
+              delta: 1
+            })  
+          }.bind(this),1500)        
+        }
+        },
+        fail (){
+          console.log("保存日记数据失败")
+          wx.showToast({
+            title: '保存失败，请重试',
+            icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+            duration: 1500     
+          })   
+        }
+      })
+    }
+    else
+    {
+      wx.showToast({
+        title: '当前内容为空，发布失败',
+        icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+        duration: 1500     
+      })
+    }
+
    
     
     

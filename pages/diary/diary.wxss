@@ -9,13 +9,6 @@
   background-size:100% 100%;
   z-index: -9;
 }
-.topnavFixed{
-  white-space: nowrap;
-  padding: 5rpx;
-  margin-right: 10rpx;
-  position:fixed;
-   top:0rpx;
-}
 .nav{
   white-space: nowrap;
   padding: 5rpx;
@@ -69,7 +62,7 @@
   height:105rpx;
 }
 .datebox{
-  margin-top: 10rpx;
+  margin: 20rpx;
   width:60%;
   display: flex;
   flex-direction: row;
@@ -108,6 +101,7 @@
     justify-content: center;
     z-index: 999;
 }
+
 
 /*外部容器*/
 .listview-container {

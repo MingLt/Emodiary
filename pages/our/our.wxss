@@ -5,17 +5,29 @@
   align-items: center;
 }
 .logo{
-  height: 300rpx;
+  height: 200rpx;
   position: relative;
-  margin:20px;
+  margin:20rpx;
 }
 .intro{
-  margin:40rpx;
+  margin:30rpx;
+  margin-top:135rpx;
   display: block;
   /* height: 200rpx; */
-  width: 600rpx;
-  line-height:24px;
+  width: 620rpx;
+  line-height:65rpx;
+  letter-spacing: 7rpx;
+  color:#8B8682;
+  
 }
-page{
-  background-image: url(https://img2020.cnblogs.com/blog/2529663/202111/2529663-20211116201833436-341787871.jpg);
+/* page{
+  background-image: url(https://img2020.cnblogs.com/blog/2529663/202111/2529663-20211125184839094-386638397.jpg);
+} */
+.bg{
+  width: 100%;
+  height: 100%;
+  position:fixed; 
+  background-size:100% 100%;
+  z-index: -1;
+  /* filter: blur(3rpx); */
 }

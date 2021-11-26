@@ -4,10 +4,12 @@ Page({
     text:String,
     array:[],
     count:0,
-    name:"匿名用户",
+    picNum:[1,3,2,0,2,1,3,0],
+    name:["小鳄鱼","小松鼠","长颈鹿","鸭鸭","长颈鹿","小鳄鱼","小松鼠","鸭鸭"],
     pageNum:1,
   }, 
   onShow:function(){
+    
     var that=this
     wx.request({
       url: 'https://luckym.top/treeHole/search',
@@ -33,6 +35,7 @@ Page({
             count:res.data.data.count
           })        
          }
+         that.changeParentData()
       },
       fail (){
         wx.showToast({
@@ -43,6 +46,7 @@ Page({
       },
     })
     console.log("数组数据为："+this.data.array)
+    
   },
 
   // 编辑树洞帖子
@@ -64,7 +68,43 @@ Page({
       }
     })
   },
-
+  changeData:function(){
+    var that=this
+    this.setData({
+      pageNum:1
+    })
+wx.request({
+  url: 'https://luckym.top/treeHole/getAll',
+  method: 'get',
+  data: {
+    page: 1,
+    per_page:5,
+  },
+  header: {
+    'content-type': 'application/json' // 默认值
+  },
+  success (res) {
+    if(res.data.msg=="没有数据")
+        {
+          that.setData({
+          array:[],
+        })
+        } else {
+          that.setData({
+            array:res.data.tree_holes,
+            // name: (Math.random() * 100000 + 200000).toFixed(0),
+          })        
+    }
+  },
+  fail (){
+    wx.showToast({
+      title: '获取失败，请稍后重试',
+      icon:'none',
+      duration:2500,
+    })
+  }
+})
+},
   //点赞
   add_dianzan(e){
     var that=this
@@ -96,6 +136,7 @@ Page({
             [addchange]:that.data.array[idkey].likes-1
           })
         }
+        that.changeParentData()
       },
       fail (){
         wx.showToast({
@@ -107,7 +148,6 @@ Page({
     })
 
   },
-
 
   //收藏
   add_collect(e){
@@ -176,10 +216,12 @@ Page({
         }
       }
     })
+    
   },
  
  
   onLoad: function () {
+    
 
      //接受搜索文本
     console.log("receive: "+this.options.text);
@@ -202,5 +244,88 @@ Page({
     })
   },
 
+  
+  choiceop:function(event){
+    var that=this
+    console.log(event)
+    console.log(event.currentTarget.dataset.id)
+    var idkey=event.currentTarget.dataset.id;
+    this.setData({
+       idkey:idkey
+    })
+    wx.setStorageSync('hole_id', this.data.array[idkey].tree_hole_id);
+    wx.setStorageSync('u_id', this.data.array[idkey].user_id);
+    wx.showActionSheet({
+    itemList: ['删除', '举报'],//显示的列表项
+    success: function (res) { //res.tapIndex点击的列表项
+       console.log("点击了列表项：" + that[res.tapIndex])
+       console.log(res.tapIndex)
+       if(res.tapIndex) 
+        wx.navigateTo({
+          url: '../complain/complain?idkey='+idkey,
+        })
+       else{
+        wx.showToast({
+          title: '请前往 [我的树洞]',
+          icon: 'none',    //如果要纯文本，不要icon，将值设为'none'
+          duration: 1500     
+        })
+       }
+    },
+    fail: function (res) { 
+      console.log("操作失败")
+    },
+    complete:function(res){
+      console.log("操作完成")
+    }
+  })
 
+  },
+  changeParentData: function () {
+    console.log("1234567")
+    var pages =getCurrentPages();//当前页面栈
+    if (pages.length >1) {
+        var beforePage = pages[pages.length- 2];//获取上一个页面实例对象
+        beforePage.changeData();//触发父页面中的方法
+    }
+  },
+  changeData:function(){
+    var that=this
+    this.setData({
+      pageNum:1,
+      search_text :null
+    })
+wx.request({
+  url: 'https://luckym.top/treeHole/getAll',
+  method: 'get',
+  data: {
+    page: 1,
+    per_page:5,
+  },
+  header: {
+    'content-type': 'application/json' // 默认值
+  },
+  success (res) {
+    if(res.data.msg=="没有数据")
+        {
+          that.setData({
+          array:[],
+          search_text :null
+        })
+        } else {
+          that.setData({
+            array:res.data.tree_holes,
+            // name: (Math.random() * 100000 + 200000).toFixed(0),
+          })        
+    }
+  },
+  fail (){
+    wx.showToast({
+      title: '获取失败，请稍后重试',
+      icon:'none',
+      duration:2500,
+    })
+  }
+})
+}
 })
